@@ -51,8 +51,7 @@ Automated IP blocking
 Incident logging
 Alert handling
 
-⚡ ## Response Flow
-
+## ⚡ Response Flow
 Attack occurs (e.g., SSH brute force)
 Wazuh generates events
 AI analyzes anomalies
@@ -60,18 +59,18 @@ Alert is created
 Playbook is executed
 IP is automatically blocked
 
-🚀 ## Run the Project
+## 🚀 Run the Project
 
 docker compose up -d
 docker ps
 
-🧪 ## Test the Pipeline
+## 🧪 Test the Pipeline
 
 python3 detect_anomalies.py
 python3 alert_manager.py
 python3 response_playbook.py
 
-📊 ## Results
+## 📊 Results
 
 AI detected anomalies in real time
 Attacks were detected by Wazuh
@@ -79,12 +78,11 @@ IP addresses were automatically blocked
 Incidents were logged
 
 
-📈 ## AI vs Rule-Based Detection
+## 📈 AI vs Rule-Based Detection
 
 Method	     Time to Detection	Precision
 Regelbaserad	~30 sek	         High
 AI	            ~10 sek	         Medium–High
-
 👉 AI improved detection time by approximately 40–60%
 
 
@@ -104,15 +102,14 @@ Improved threat analysis
 ## Simulated Attack (Windows → Linux/WSL)
 A realistic attack was simulated from an external Windows machine targeting a Linux environment.
 
-## Scenario
-
+Scenario
 Attacker: Windows (PowerShell)
 Target: Linux (WSL + Wazuh agent)
 Attack: SSH brute force
 
 ## Steps
-## Attack:
 
+ Attack:
 1. Attempt SSH Login (Incorrect Password)
 ssh fakeuser@172.24.59.214
 ➡️ Multiple failed login attempts are generated
