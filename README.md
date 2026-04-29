@@ -1,117 +1,94 @@
-🛡️ SIEM + AI + SOAR Lab (Wazuh)
+🛡️ SIEM + AI + SOAR Security Lab (Wazuh)
+Attack → Logs → Wazuh → AI Detection → Alert → Playbook → Block IP
 
-Attack → Logs → Wazuh → AI → Alert → Playbook → Block IP
+📌 Overview
 
-🔍 Beskrivning
+This project demonstrates a complete modern SOC pipeline combining:
+SIEM (Wazuh) – log collection and rule-based detection
+AI Detection (Python) – anomaly detection using statistical and machine learning models
+SOAR (Automation) – automated incident response
+The system detects, analyzes, and automatically mitigates security threats in real time.
 
-Detta projekt implementerar en komplett säkerhetslösning som kombinerar:
+🧠 Key Features
+SSH brute force detection
+File Integrity Monitoring (FIM)
+AI-based anomaly detection
+Automatic alert generation
+Automated IP blocking with iptables
+Incident logging
+Security dashboard visualization
 
-SIEM – logginsamling och regelbaserad detektion (Wazuh)
-AI – anomalidetektion med Python (Z-score + Isolation Forest)
-SOAR – automatiserad incidentrespons (iptables)
+🏗️ Architecture
+Overview
 
-Systemet detekterar attacker, analyserar beteenden och agerar automatiskt genom att blockera hot.
-
-🧠 Funktioner
-
-🔐 SSH brute force-detektion
-📁 File Integrity Monitoring (FIM)
-🤖 AI-baserad anomalidetektion
-🚨 Automatisk larmgenerering
-🔥 Automatisk IP-blockering (iptables)
-🧾 Incidentloggning
-
-🏗️ Arkitektur
-🔹 Översikt
-
-Systemet består av:
+The system consists of:
 Wazuh SIEM (Docker)
-AI anomalidetektion (Python)
-Alert manager
-Automatiserad respons (SOAR)
+OpenSearch (indexing)
+Dashboard (visualization)
+Python scripts for AI detection and automation
+SOAR response playbook using iptables
 
-🔄 Dataflöde
-
-[Attack]
-   ↓
-[Logs]
-   ↓
-[Wazuh Agent]
-   ↓
-[Wazuh Manager]
-   ↓
-[OpenSearch]
-   ↓
-[Dashboard]
-
-[AI Detection]
-   ↓
-[Alert Manager]
-   ↓
-[Response Playbook]
-   ↓
-[Block IP (iptables)]
+Data Flow
+[Attack] - [Logs] -[Wazuh Agent] - [Wazuh Manager] - [OpenSearch] - [Dashboard] - [AI Detection] - [Alert Manager] - [Response Playbook] - [Block IP (iptables)]
 
 
-🔐 Komponenter
-
-Wazuh
-Logginsamling
-Regelbaserad detektion
-FIM
+🔐 Components
+Wazuh:
+Log collection
+Rule-based detection
+File Integrity Monitoring
 
 AI Detection
-Z-score analys
+Z-score anomaly detection
 Isolation Forest
 
-SOAR (Response)
-Automatisk IP-blockering
+SOAR
+Automated IP blocking
 Incident logging
-Alert generering
+Alert handling
 
-⚡ Responsflöde
+⚡ Response Flow
+Attack occurs (e.g., SSH brute force)
+Wazuh generates events
+AI analyzes anomalies
+Alert is created
+Playbook is executed
+IP is automatically blocked
 
-Attack sker (t.ex. SSH brute force)
-Wazuh genererar events
-AI analyserar anomalier
-Alert skapas
-Playbook körs
-IP blockeras automatiskt
-
-🚀 Kör projektet
-
+🚀 Run the Project
 docker compose up -d
 docker ps
 
-🧪 Testa pipeline
-
+🧪 Test the Pipeline
 python3 detect_anomalies.py
 python3 alert_manager.py
 python3 response_playbook.py
 
-📊 Resultat
-
-AI identifierade anomalier i realtid
-Attacker detekterades via Wazuh
-IP-adresser blockerades automatiskt
-Incidenter loggades
-
-📈## AI vs Regelbaserad Detektion
-
-Metod	Tid till detektion	Precision
-Regelbaserad	~30 sek	Hög
-AI	~10 sek	Medium–Hög
-
-👉 AI förbättrade detektionstiden med ~40–60%
+📊 Results
+AI detected anomalies in real time
+Attacks were detected by Wazuh
+IP addresses were automatically blocked
+Incidents were logged
 
 
-🧠 ## Slutsats
+📈 AI vs Rule-Based Detection
+Method	     Time to Detection	Precision
+Regelbaserad	~30 sek	         High
+AI	            ~10 sek	         Medium–High
 
-Kombinationen av:
+👉 AI improved detection time by approximately 40–60%
+
+
+🧠 Conclusion
+The combination of:
 SIEM
 AI
 SOAR
 
+resulted in:
+Faster detection
+Automated response
+Improved threat analysis
 gav:
 
 ⚡ Snabbare detektion
@@ -119,89 +96,92 @@ gav:
 🔍 Bättre hotanalys
 ⚔️ Simulerad attack (Windows → Linux/WSL)
 
-En realistisk attack simulerades från en extern Windows-maskin mot en Linux-miljö.
+Simulated Attack (Windows → Linux/WSL)
+A realistic attack was simulated from an external Windows machine targeting a Linux environment.
+🎯 Scenario
+Attacker: Windows (PowerShell)
+Target: Linux (WSL + Wazuh agent)
+Attack: SSH brute force
 
+## Steps
+1. Attempt SSH Login (Incorrect Password)
 
-### 🎯 Scenario
-- Angripare: Windows (PowerShell)
-- Mål: Linux (WSL + Wazuh agent)
-- Typ: SSH brute force attack
-
----
-
-## 🧪 Steg
-
-### 1. Försök logga in via SSH (fel lösenord)
-
-Attack
+Attack:
 ssh fakeuser@172.24.59.214
-➡️ Flera misslyckade login-försök genereras
+➡️ Multiple failed login attempts are generated
 
-2. Verifiera nätverksåtkomst
+2. Verify Network Connectivity
 ping 172.24.59.214
 
-3. Wazuh detekterar attack
-Regel: 5710 (invalid user)
-Regel: 100001 (brute force)
+3. Wazuh Detects the Attack
+Rule: 5710 (Invalid user)
+Rule: 100001 (Brute force)
 
-4. AI analyserar anomalier
-Högt antal events
-Avvikande beteende
-Klassificeras som critical
+4. AI Analyzes Anomalies
+High number of events
+Abnormal behavior detected
+Classified as critical
 
-5. Automatisk respons
-IP blockeras via iptables
-Incident loggas
+5. Automated Response
+IP is blocked via iptables
+Incident is logged
 
-📸 Bevis finns i screenshot delan.
-Attack från Windows
-Wazuh alerts
-Loggar
-Blockering
+🧠 Analysis
+SIEM identified attack patterns in logs
+Repeated failed logins triggered detection
+AI detected deviations in event behavior
+IP addresses were key indicators
 
+🔍 Insights
+SIEM can distinguish internal vs external threats
+Brute force attacks generate clear patterns
+IP correlation is critical for response
 
-🧠 ## Analys av attack
-SIEM identifierade attack via loggmönster
-Flera failed logins → brute force
-AI identifierade avvikelse i event-volym
-IP-adresser användes som nyckelindikator
-🔍 Insikter
-SIEM kan särskilja interna vs externa hot
-Brute force skapar tydliga loggmönster
-IP-adresser är kritiska för korrelation
+📸 Evidence in screenshots.
+Simulated Attack from a Windows Host
+Security Alerts Generated by Wazuh
+Collected Log Data
+Security Dashboard Overview
+Brute Force Detection Alerts
+File Integrity Monitoring (FIM) Events
+AI-Based Threat Detection Output
+IP Address Blocking via iptables
+Network Traffic Analysis using Wireshark
 
-🧾##  Reflektion
+🧾 Reflection
+In this project, a complete security solution was implemented using SIEM, AI-based anomaly detection, and automated incident response.
+One of the key learnings was understanding how different components interact within a modern security architecture. Wazuh was used for log collection and rule-based detection, while Python was used to analyze anomalies using statistical and machine learning techniques.
 
-I detta projekt implementerades en komplett säkerhetslösning med SIEM, AI och automatiserad respons.
+Key Learnings
+Integration of SIEM, AI, and automation
+Importance of structured logs and data flow
+Debugging distributed systems
+Designing automated incident response workflows
 
-En viktig lärdom var hur olika komponenter samverkar i en modern säkerhetsarkitektur. Wazuh hanterade logginsamling och regelbaserad detektion, medan Python användes för att analysera anomalier.
+Challenges
+Ensuring correct JSON formatting between AI modules and Wazuh
+Configuring automated response mechanisms
+Troubleshooting log pipelines and data flow
+Handling container-based networking environments
 
-Utmaningar inkluderade:
+Outcome
+The final solution resulted in a fully functional pipeline where:
+Attacks are detected in real time
+Anomalies are identified using AI
+Malicious IP addresses are automatically blocked
 
-korrekt JSON-format mellan AI och Wazuh
-konfigurering av automatiserad respons
-felsökning av loggflöden
+This project demonstrates how AI can enhance traditional SIEM systems by improving detection speed and enabling dynamic, automated response.
+The solution evolved from using sudo to running iptables directly inside the Docker container.
 
-Lösningen utvecklades från att använda sudo till att köra iptables direkt i Docker-containern.
+🚀 Future Improvements
+Additional data sources
+More advanced machine learning models
+Integration with Slack / Email alerts
 
-✅## Resultat
-Attacker detekteras automatiskt
-Anomalier identifieras med AI
-IP-adresser blockeras i realtid
+🎯 Summary
+This project demonstrates how:
+SIEM + AI + SOAR = modern, automated cybersecurity
 
-🚀 ## Framtida förbättringar
-Fler datakällor
-Mer avancerade ML-modeller
-Integration med Slack / Email alerts
-
-🎯## Sammanfattning
-
-Projektet visar hur:
-
-SIEM + AI + SOAR = modern, automatiserad cybersäkerhet
-
-
-👨‍💻 Författare
-
+👨‍💻 Author
 Abdihakim
 DevOps & Cybersecurity
