@@ -102,20 +102,18 @@ Automated response
 Improved threat analysis
 
 ## Simulated Attack (Windows → Linux/WSL)
-
 A realistic attack was simulated from an external Windows machine targeting a Linux environment.
 
-🎯 ## Scenario
+## Scenario
 
 Attacker: Windows (PowerShell)
 Target: Linux (WSL + Wazuh agent)
 Attack: SSH brute force
 
 ## Steps
+## Attack:
 
 1. Attempt SSH Login (Incorrect Password)
-
-## Attack:
 ssh fakeuser@172.24.59.214
 ➡️ Multiple failed login attempts are generated
 
@@ -135,14 +133,14 @@ Classified as critical
 IP is blocked via iptables
 Incident is logged
 
-🧠 ## Analysis
+## 🧠 Analysis
 
-SIEM identified attack patterns in logs
-Repeated failed logins triggered detection
-AI detected deviations in event behavior
-IP addresses were key indicators
+- SIEM identified attack patterns in logs
+- Repeated failed logins triggered detection
+- AI detected deviations in event behavior
+- IP addresses were key indicators
 
-🔍 ## Insights
+## 🔍 Insights
 
 SIEM can distinguish internal vs external threats
 Brute force attacks generate clear patterns
@@ -160,24 +158,27 @@ AI-Based Threat Detection Output
 IP Address Blocking via iptables
 Network Traffic Analysis using Wireshark
 
-🧾 ## Reflection
+## 🧾 Reflection
 
 In this project, a complete security solution was implemented using SIEM, AI-based anomaly detection, and automated incident response.
 One of the key learnings was understanding how different components interact within a modern security architecture. Wazuh was used for log collection and rule-based detection, while Python was used to analyze anomalies using statistical and machine learning techniques.
 
 ## Key Learnings
+
 Integration of SIEM, AI, and automation
 Importance of structured logs and data flow
 Debugging distributed systems
 Designing automated incident response workflows
 
-Challenges
+## Challenges 
+
 Ensuring correct JSON formatting between AI modules and Wazuh
 Configuring automated response mechanisms
 Troubleshooting log pipelines and data flow
 Handling container-based networking environments
 
-Outcome
+## Outcome
+
 The final solution resulted in a fully functional pipeline where:
 Attacks are detected in real time
 Anomalies are identified using AI
@@ -186,17 +187,18 @@ Malicious IP addresses are automatically blocked
 This project demonstrates how AI can enhance traditional SIEM systems by improving detection speed and enabling dynamic, automated response.
 The solution evolved from using sudo to running iptables directly inside the Docker container.
 
-🚀 Future Improvements
+## Future Improvements
+
 Additional data sources
 More advanced machine learning models
 Integration with Slack / Email alerts
 
-🎯 Summary
+## 🎯 Summary
 
 This project demonstrates how:
 SIEM + AI + SOAR = modern, automated cybersecurity
 
-👨‍💻 Author
+## 👨‍💻 Author
 
 Abdihakim
 DevOps & Cybersecurity
