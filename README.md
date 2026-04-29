@@ -1,7 +1,8 @@
-🛡️ SIEM + AI + SOAR Security Lab (Wazuh)
+🛡️## SIEM + AI + SOAR Security Lab (Wazuh)
+
 Attack → Logs → Wazuh → AI Detection → Alert → Playbook → Block IP
 
-📌 Overview
+📌 ## Overview
 
 This project demonstrates a complete modern SOC pipeline combining:
 SIEM (Wazuh) – log collection and rule-based detection
@@ -9,7 +10,8 @@ AI Detection (Python) – anomaly detection using statistical and machine learni
 SOAR (Automation) – automated incident response
 The system detects, analyzes, and automatically mitigates security threats in real time.
 
-🧠 Key Features
+🧠 ## Key Features
+
 SSH brute force detection
 File Integrity Monitoring (FIM)
 AI-based anomaly detection
@@ -18,7 +20,8 @@ Automated IP blocking with iptables
 Incident logging
 Security dashboard visualization
 
-🏗️ Architecture
+🏗️ ## Architecture
+
 Overview
 
 The system consists of:
@@ -28,11 +31,11 @@ Dashboard (visualization)
 Python scripts for AI detection and automation
 SOAR response playbook using iptables
 
-Data Flow
+## Data Flow
 [Attack] - [Logs] -[Wazuh Agent] - [Wazuh Manager] - [OpenSearch] - [Dashboard] - [AI Detection] - [Alert Manager] - [Response Playbook] - [Block IP (iptables)]
 
 
-🔐 Components
+🔐 ## Components
 Wazuh:
 Log collection
 Rule-based detection
