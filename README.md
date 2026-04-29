@@ -1,55 +1,118 @@
-# SIEM + AI + SOAR Lab (Wazuh)
-Attack → Logs - Wazuh → AI → Alert → Playbook → Block IP
+🛡️ SIEM + AI + SOAR Lab (Wazuh)
 
-## 🔍 Beskrivning
-Detta projekt implementerar en komplett säkerhetslösning med:
+Attack → Logs → Wazuh → AI → Alert → Playbook → Block IP
 
-- SIEM (Wazuh)
-- AI-baserad anomalidetektion
-- Automatiserad incidentrespons (SOAR)
+🔍 Beskrivning
 
----
+Detta projekt implementerar en komplett säkerhetslösning som kombinerar:
 
-## 🧠 Funktioner
-- SSH brute force detection
-- File Integrity Monitoring (FIM)
-- AI anomaly detection (Python)
-- Automatisk IP-blockering (iptables)
+SIEM – logginsamling och regelbaserad detektion (Wazuh)
+AI – anomalidetektion med Python (Z-score + Isolation Forest)
+SOAR – automatiserad incidentrespons (iptables)
 
----
+Systemet detekterar attacker, analyserar beteenden och agerar automatiskt genom att blockera hot.
 
-## ⚙️ Arkitektur
-Se: docs/architecture.md
+🧠 Funktioner
+🔐 SSH brute force-detektion
+📁 File Integrity Monitoring (FIM)
+🤖 AI-baserad anomalidetektion
+🚨 Automatisk larmgenerering
+🔥 Automatisk IP-blockering (iptables)
+🧾 Incidentloggning
 
----
+🏗️ Arkitektur
+🔹 Översikt
 
-## 🚀 Kör projektet
+Systemet består av:
+Wazuh SIEM (Docker)
+AI anomalidetektion (Python)
+Alert manager
+Automatiserad respons (SOAR)
 
-```bash
+🔄 Dataflöde
+[Attack]
+   ↓
+[Logs]
+   ↓
+[Wazuh Agent]
+   ↓
+[Wazuh Manager]
+   ↓
+[OpenSearch]
+   ↓
+[Dashboard]
+
+[AI Detection]
+   ↓
+[Alert Manager]
+   ↓
+[Response Playbook]
+   ↓
+[Block IP (iptables)]
+
+🔐 Komponenter
+
+Wazuh
+Logginsamling
+Regelbaserad detektion
+FIM
+
+AI Detection
+Z-score analys
+Isolation Forest
+
+SOAR (Response)
+Automatisk IP-blockering
+Incident logging
+Alert generering
+
+⚡ Responsflöde
+Attack sker (t.ex. SSH brute force)
+Wazuh genererar events
+AI analyserar anomalier
+Alert skapas
+Playbook körs
+IP blockeras automatiskt
+
+🚀 Kör projektet
 docker compose up -d
 docker ps
 
-Test
+🧪 Testa pipeline
 python3 detect_anomalies.py
 python3 alert_manager.py
 python3 response_playbook.py
 
-Rusultat 
-AI identifierade anomalier
-IP blockerades automatiskt
-Incident loggades
+📊 Resultat
+AI identifierade anomalier i realtid
+Attacker detekterades via Wazuh
+IP-adresser blockerades automatiskt
+Incidenter loggades
+
+📈 AI vs Regelbaserad Detektion
+Metod	Tid till detektion	Precision
+Regelbaserad	~30 sek	Hög
+AI	~10 sek	Medium–Hög
+
+👉 AI förbättrade detektionstiden med ~40–60%
 
 
-## 📈 AI vs Regelbaserad Detektion
+🧠 Slutsats
 
-AI-modellen förbättrade detektionstiden med ~40–60% jämfört med traditionella regler.
+Kombinationen av:
+SIEM
+AI
+SOAR
 
-Se: docs/detection_comparison.md
+gav:
 
+⚡ Snabbare detektion
+🤖 Automatiserad respons
+🔍 Bättre hotanalys
+⚔️ Simulerad attack (Windows → Linux/WSL)
 
-## ⚔️ Simulerad attack (Windows → Linux/WSL)
+En realistisk attack simulerades från en extern Windows-maskin mot en Linux-miljö.
 
-För att testa systemet genomfördes en realistisk attack där en extern maskin (Windows) attackerade en Linux-miljö (WSL).
 
 ### 🎯 Scenario
 - Angripare: Windows (PowerShell)
@@ -62,7 +125,7 @@ För att testa systemet genomfördes en realistisk attack där en extern maskin 
 
 ### 1. Försök logga in via SSH (fel lösenord)
 
-```bash
+Attack
 ssh fakeuser@172.24.59.214
 ➡️ Flera misslyckade login-försök genereras
 
@@ -89,13 +152,45 @@ Loggar
 Blockering
 
 
-Final check Wazuh fungerar
-3 regler (SSH + AI + FIM)
-FIM aktiv
-Dashboard screenshots
-AI script
-Auto block (iptables)
-Arkitektur
-Jämförelse
-Reflektion
-# wazuh-ai-soc-lab
+🧠 Analys av attack
+SIEM identifierade attack via loggmönster
+Flera failed logins → brute force
+AI identifierade avvikelse i event-volym
+IP-adresser användes som nyckelindikator
+🔍 Insikter
+SIEM kan särskilja interna vs externa hot
+Brute force skapar tydliga loggmönster
+IP-adresser är kritiska för korrelation
+🧾 Reflektion
+
+I detta projekt implementerades en komplett säkerhetslösning med SIEM, AI och automatiserad respons.
+
+En viktig lärdom var hur olika komponenter samverkar i en modern säkerhetsarkitektur. Wazuh hanterade logginsamling och regelbaserad detektion, medan Python användes för att analysera anomalier.
+
+Utmaningar inkluderade:
+
+korrekt JSON-format mellan AI och Wazuh
+konfigurering av automatiserad respons
+felsökning av loggflöden
+
+Lösningen utvecklades från att använda sudo till att köra iptables direkt i Docker-containern.
+
+✅ Resultat
+Attacker detekteras automatiskt
+Anomalier identifieras med AI
+IP-adresser blockeras i realtid
+
+🚀 Framtida förbättringar
+Fler datakällor
+Mer avancerade ML-modeller
+Integration med Slack / Email alerts
+🎯 Sammanfattning
+
+Projektet visar hur:
+
+SIEM + AI + SOAR = modern, automatiserad cybersäkerhet
+
+
+👨‍💻 Författare
+Abdihakim
+DevOps & Cybersecurity
