@@ -179,9 +179,11 @@ More advanced machine learning models
 Integration with Slack / Email alerts
 
 🎯 Summary
+
 This project demonstrates how:
 SIEM + AI + SOAR = modern, automated cybersecurity
 
 👨‍💻 Author
+
 Abdihakim
 DevOps & Cybersecurity
