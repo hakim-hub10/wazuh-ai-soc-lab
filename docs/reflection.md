@@ -1,23 +1,28 @@
-# 🧾 Reflektion
+## Reflection
 
-I detta projekt har jag implementerat en komplett säkerhetslösning med SIEM (Wazuh), AI-baserad anomalidetektion och automatiserad incidentrespons (SOAR).
+In this project, I implemented a complete security solution combining SIEM (Wazuh), AI-based anomaly detection, and automated incident response (SOAR).
 
-En av de viktigaste lärdomarna var hur olika komponenter samverkar i en modern säkerhetsarkitektur. Wazuh hanterade logginsamling och regelbaserad detektion, medan Python-skript användes för att analysera anomalier baserat på statistik och machine learning.
+One of the most important learnings was understanding how different components interact within a modern security architecture. Wazuh handled log collection and rule-based detection, while Python scripts were used to analyze anomalies using statistical methods and machine learning techniques.
 
-En utmaning var att få dataflödet att fungera korrekt mellan AI-detektion och Wazuh. Specifikt krävdes korrekt JSON-struktur för att Wazuh skulle kunna tolka AI-genererade larm. Ett annat problem var att konfigurera automatiserad respons, där jag först använde sudo och senare gick över till att exekvera iptables direkt i Docker-containern.
+One of the main challenges was ensuring a correct data flow between the AI detection module and Wazuh. Specifically, it was necessary to structure the JSON output properly so that Wazuh could interpret AI-generated alerts. Another challenge was configuring automated response, where I initially used sudo, but later improved the solution by executing iptables directly inside the Docker container.
 
-Jag lärde mig även vikten av loggstruktur, datavalidering och felsökning i distribuerade system. Att debugga Wazuh-regler och förstå hur events processas var centralt.
+I also learned the importance of log structure, data validation, and troubleshooting in distributed systems. Debugging Wazuh rules and understanding how events are processed was a key part of the development process.
 
-Resultatet blev en fungerande pipeline där:
-- attacker detekteras
-- anomalier identifieras
-- IP-adresser blockeras automatiskt
+## Outcome
 
-Projektet visar tydligt hur AI kan komplettera traditionella säkerhetslösningar och bidra till snabbare och mer dynamisk hotdetektion.
+The final result was a fully functional pipeline where:
 
-Framöver skulle systemet kunna förbättras genom:
-- fler datakällor
-- bättre ML-modeller
-- integration med externa alert-system (Slack, email)
+Attacks are detected
+Anomalies are identified using AI
+Malicious IP addresses are automatically blocked
 
-Sammanfattningsvis har projektet gett en djup förståelse för både SIEM, cybersäkerhet och automatisering.
+This project clearly demonstrates how AI can complement traditional security solutions and contribute to faster and more dynamic threat detection.
+
+## Future Improvements
+Integrate additional data sources
+Improve machine learning models
+Add integrations with external alerting systems (e.g., Slack, email)
+
+## Summary
+
+Overall, this project provided a deep understanding of SIEM systems, cybersecurity workflows, and automation, and how these components can be combined to build a modern and effective security solution.

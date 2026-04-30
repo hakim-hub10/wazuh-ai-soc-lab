@@ -1,98 +1,87 @@
-# Architecture
+## Architecture — SIEM + AI + SOAR
+📌 Overview
 
-## Overview
+This system implements a complete security pipeline combining:
 
-This system consists of:
+SIEM (Wazuh) – log collection and rule-based detection
+AI Detection (Python) – anomaly detection using statistical and ML methods
+SOAR (Automation) – automated incident response
 
-- Wazuh SIEM (Docker)
-- AI anomaly detection (Python)
-- Alert manager
-- Automated response (iptables)
+## Architecture Layers
 
-## Flow
+The system is divided into three main layers:
 
-Attack → Logs → Wazuh → AI Detection → Alert → Playbook → Block IP
+Data Collection (Wazuh Agent)
+Analysis (Wazuh + AI Model)
+Response (SOAR / Active Response)
 
-## Components
-
-- Wazuh Manager (log analysis)
-- OpenSearch (indexing)
-- Dashboard (visualization)
-- Python scripts (AI + automation)
-
-## Network
-
-- Docker network (172.x.x.x)
-- Agent → Manager communication
-
-
-# 🏗️ Arkitektur — SIEM + AI + SOAR
-
-## Översikt
-
-Systemet består av tre huvuddelar:
-
-1. **Datainsamling (Wazuh Agent)**
-2. **Analys (Wazuh + AI-modell)**
-3. **Respons (SOAR / Active Response)**
-
----
-
-## 🔄 Dataflöde
+## Data Flow
 [Linux System / Logs]
-↓
+        ↓
 [Wazuh Agent]
-↓
+        ↓
 [Wazuh Manager]
-↓
+        ↓
 [OpenSearch Indexer]
-↓
+        ↓
 [Dashboard]
 
 [AI Detection Script (Python)]
-↓
+        ↓
 [Alert Manager]
-↓
+        ↓
 [Response Playbook (SOAR)]
-↓
-[iptables block]
+        ↓
+[iptables Block]
+
+## Process Flow (Simplified)
+Attack
+  ↓
+Logs Generated
+  ↓
+Wazuh Detection
+  ↓
+AI Analysis
+  ↓
+Alert Creation
+  ↓
+Response Playbook
+  ↓
+IP Blocked
+
+## Components
+Wazuh (SIEM)
+Log collection from system and applications
+Rule-based detection (e.g. SSH brute force)
+File Integrity Monitoring (FIM)
+
+AI Detection
+Z-score analysis for anomaly detection
+Isolation Forest for behavioral anomalies
+Identifies deviations from normal activity
+
+SOAR (Automated Response)
+Automatic IP blocking using iptables
+Incident logging and tracking
+Alert generation and handling
+
+Network
+Docker-based environment (172.x.x.x network)
+Communication flow:
+[Agent] → [Manager] → [Indexer] → [Dashboard]
+External attacker simulated from Windows → Linux (WSL)
+
+## Response Flow
+Attack occurs (e.g. SSH brute force)
+Wazuh generates events based on logs
+AI analyzes anomalies in behavior
+Alert is generated
+Response playbook is executed
+Malicious IP is blocked via iptables
 
 
-
-
----
-
-## 🔐 Komponenter
-
-### Wazuh
-- Logginsamling
-- Regelbaserad detektion
-- FIM (File Integrity Monitoring)
-
-### AI Detection
-- Z-score analys
-- Isolation Forest (anomaly_score)
-
-### SOAR (Response)
-- Automatisk IP-blockering
-- Incident logging
-- Alert generering
-
----
-
-## ⚡ Responsflöde
-
-1. Attack sker (t.ex SSH brute force)
-2. Wazuh genererar events
-3. AI analyserar anomalier
-4. Alert genereras
-5. Response playbook körs
-6. IP blockeras via iptables
-
----
-
-## 🎯 Säkerhetsmål
-
-- Snabb detektion
-- Automatiserad respons
-- Minskad attackyta
+## Security Objectives
+⚡ Fast detection of threats
+🤖 Automated incident response
+🔒 Reduced attack surface
+📊 Improved visibility into security events

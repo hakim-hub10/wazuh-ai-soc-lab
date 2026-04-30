@@ -1,68 +1,53 @@
-# 📊 Jämförelse: Regelbaserad vs AI-detektion
+## Detection Comparison: Rule-Based vs AI-Based Detection
+Rule-Based Detection (Wazuh)
 
-## Regelbaserad detektion (Wazuh)
+## Advantages
+Fast and efficient
+Stable and predictable
+Easy to understand and interpret
 
-Fördelar:
-- Snabb
-- Stabil
-- Förutsägbar
+## Disadvantages
+Limited to known attack patterns
+Requires manual rule creation and maintenance
+Lacks contextual awareness
+May miss novel or evolving threats
 
-Nackdelar:
-- Missar nya attacker
-- Kräver manuella regler
-- Ingen kontext
+##AI-Based Detection
 
----
+## Advantages
+Identifies anomalies in behavior
+Detects unknown or zero-day attacks
+Adaptive to changing patterns
+Provides deeper analytical insights
 
-## AI-baserad detektion
+## Disadvantages
+Requires tuning and training
+May generate false positives
+More complex to implement and maintain
 
-Fördelar:
-- Identifierar anomalier
-- Upptäcker okända attacker
-- Anpassningsbar
-
-Nackdelar:
-- Kräver tuning
-- Kan ge false positives
-
----
-
-## 📈 Resultat i detta projekt
-
-| Metod | Tid till detektion | Precision |
-|------|------------------|----------|
-| Regelbaserad | ~30 sek | Hög |
-| AI | ~10 sek | Medium–Hög |
-
----
-
-## 🧠 Slutsats
-
-AI förbättrade detektionstiden med ~40–60% jämfört med traditionella regler.
-
-Kombinationen av SIEM + AI + SOAR gav:
-
-- Snabbare respons
-- Automatiserad mitigation
-- Bättre säkerhetsöverblick
+## Results from This Project
+Method	Detection Time	Accuracy
+Rule-Based	~30 seconds	High
+AI-Based	~10 seconds	Medium–High
 
 
----
+## Conclusion
+AI-based detection improved detection time by approximately 40–60% compared to traditional rule-based methods.
 
-# 🧠 2. Lägg till analys (VG-nivå)
+## The combination of SIEM + AI + SOAR enabled:
+⚡ Faster detection and response
+🤖 Automated threat mitigation
+🔍 Improved visibility and analysis of security events
 
-I README eller `docs/detection_comparison.md`, lägg till:
+## Attack Analysis
+The SIEM system identified the attack based on recognizable patterns in log data
+Multiple failed login attempts triggered brute force detection rules
+The AI model detected anomalies in event volume and behavior
+IP addresses were used as key indicators for correlation and response
 
-```md
-## 🧠 Analys av attack
 
-- SIEM kunde identifiera attacken baserat på mönster i loggar
-- Flera failed logins → brute force-detektion
-- AI identifierade avvikelse i event-volym
-- IP-adresser användes som nyckelindikator
-
-### 🔍 Insikter
-
-- SIEM kan särskilja interna vs externa attacker
-- Brute force genererar tydliga loggmönster
-- IP-adresser är kritiska för korrelation och respons
+## Key Insights
+SIEM can distinguish between internal and external threats
+Brute force attacks generate clear and repeatable log patterns
+IP addresses are critical for threat correlation and automated response
+Combining rule-based and AI detection provides stronger overall security coverage
