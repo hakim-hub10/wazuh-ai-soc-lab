@@ -85,7 +85,11 @@ AI	            ~10 sek	         Medium–High
 👉 AI improved detection time by approximately 40–60%
 
 
+<<<<<<< HEAD
 🧠 ## Conclusion
+=======
+##  Conclusion
+>>>>>>> e297953 (Readme.md updates)
 
 The combination of:
 SIEM
